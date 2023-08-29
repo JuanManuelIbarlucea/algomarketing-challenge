@@ -5,9 +5,11 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import { Task } from '@/lib/types';
+import axios from 'axios';
 
 type TasksContextType = {
   tasks: Task[];
@@ -18,6 +20,12 @@ export const TasksContext = createContext<TasksContextType | null>(null);
 
 export function TasksContextProvider({ children }: { children: ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    axios.get('/api/tasks').then((result) => {
+      setTasks(result.data);
+    });
+  }, []);
 
   return (
     <TasksContext.Provider

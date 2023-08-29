@@ -5,6 +5,7 @@ export type TaskType = (typeof Types)[number];
 export type LabelsType = (typeof Labels)[number];
 
 export type Task = {
+  _id?: string;
   name: string;
   description: string;
   type: TaskType;

@@ -1,6 +1,5 @@
 'use client';
 import useTasksContext from '@/contexts/tasks-context';
-import { mockTasks } from '@/lib/mocks';
 import TaskList from './task-list';
 
 export default function TaskDisplay() {

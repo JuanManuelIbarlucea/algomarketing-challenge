@@ -16,14 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <TasksContextProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <TasksContextProvider>
           <div className="flex items-center justify-center m-5 md:h-[100vh] md:m-auto max-w-[80rem]">
             {children}
           </div>
-        </body>
-      </html>
-    </TasksContextProvider>
+        </TasksContextProvider>
+      </body>
+    </html>
   );
 }

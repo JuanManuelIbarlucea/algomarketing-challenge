@@ -7,6 +7,7 @@ import {
   isDueWithinMonths,
 } from '@/lib/helpers';
 import { LabelsType, Task, TaskType, Types } from '@/lib/types';
+import axios from 'axios';
 import { FormEvent, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -62,26 +63,26 @@ export default function TaskForm() {
     return 'Not important';
   }
 
-  function createTask(ev: FormEvent) {
+  async function createTask(ev: FormEvent) {
     ev.preventDefault();
 
-    const newTask: Task = {
+    const { data } = await axios.post('/api/tasks', {
       name,
       description,
       type,
       dueDate,
       label: getTaskLabel(),
-    };
+    });
 
     setTasks((prev) => {
-      return [...prev, newTask];
+      return [...prev, data];
     });
   }
 
   return (
     <div className="w-full h-full bg-white rounded-l-xl p-5 ">
       <h1>Task Form</h1>
-      <form className="flex flex-col m-auto" onSubmit={createTask}>
+      <form className="flex flex-col h-full m-auto" onSubmit={createTask}>
         <label>Product name</label>
         <input
           value={name}
@@ -93,6 +94,7 @@ export default function TaskForm() {
         />
         <label>Description</label>
         <textarea
+          className="h-[15rem] resize-none"
           value={description}
           placeholder="Task Description"
           required
