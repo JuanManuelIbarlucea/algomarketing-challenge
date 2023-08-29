@@ -1,4 +1,4 @@
-# code-challenge-crossmint
+# algomarketing-challenge
 
 ## Getting Started
 
