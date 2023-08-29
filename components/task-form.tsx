@@ -22,6 +22,7 @@ export default function TaskForm() {
       description,
       type,
       dueDate,
+      label: 'Urgent',
     };
 
     setTasks((prev) => {

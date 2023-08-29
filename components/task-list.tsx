@@ -1,5 +1,5 @@
-import { Task, TaskType } from '@/lib/types';
-import React from 'react';
+import { Labels, Task, TaskType } from '@/lib/types';
+import { twMerge } from 'tailwind-merge';
 
 export default function TaskList({ tasks }: { tasks: Task[] }) {
   function getTypeColor(type: (typeof TaskType)[number]) {
@@ -10,11 +10,18 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
 
     return '#fff';
   }
+  function getLabelColor(label: (typeof Labels)[number]) {
+    if (label === 'Urgent') return 'bg-rose-700';
+    if (label === 'Can be postponed') return 'bg-amber-700';
+    if (label === 'Not important') return 'bg-cyan-700';
+
+    return '#fff';
+  }
 
   return (
     <ul className="flex flex-col gap-3">
       {tasks?.map((task) => (
-        <li className="bg-white rounded-xl p-5 text-ellipsis shadow-xl">
+        <li className="bg-white rounded-xl p-5 text-ellipsis shadow-xl relative overflow-hidden">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +49,14 @@ export default function TaskList({ tasks }: { tasks: Task[] }) {
           </p>
           <p className="text-xl">{task.name}</p>
           <p className="text-sm">{task.description}</p>
+          <p
+            className={twMerge(
+              'text-white absolute p-2 top-[2rem] -right-[7rem] rotate-45 bg-red-700 w-[20rem] text-center text-sm',
+              getLabelColor(task.label)
+            )}
+          >
+            {task.label}
+          </p>
         </li>
       ))}
     </ul>
