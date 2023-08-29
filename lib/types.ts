@@ -1,10 +1,13 @@
-export const TaskType = ['Work', 'Personal', 'Health', 'Other'] as const;
+export const Types = ['Work', 'Personal', 'Health', 'Other'] as const;
 export const Labels = ['Urgent', 'Can be postponed', 'Not important'] as const;
+
+export type TaskType = (typeof Types)[number];
+export type LabelsType = (typeof Labels)[number];
 
 export type Task = {
   name: string;
   description: string;
-  type: (typeof TaskType)[number];
+  type: TaskType;
   dueDate: Date;
-  label: (typeof Labels)[number];
+  label: LabelsType;
 };
