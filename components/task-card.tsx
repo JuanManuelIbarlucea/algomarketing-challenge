@@ -57,7 +57,7 @@ export default function TaskCard({ task }: { task: Task }) {
       <p className="text-sm break-words">{task.description}</p>
 
       <div
-        className="absolute bg-red-500  rounded-tr-xl p-2 top-0 right-0"
+        className="absolute bg-red-500  rounded-tr-xl p-2 top-0 right-0 cursor-pointer"
         onClick={deleteTask}
       >
         <svg
